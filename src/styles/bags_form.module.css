@@ -1,0 +1,9 @@
+.bagsForm {
+  margin: 2rem 4rem;
+}
+
+@media(max-width:400px){
+  .bagsForm {
+    margin: 1rem 2rem;
+  }
+}
