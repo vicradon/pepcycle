@@ -2,18 +2,28 @@ import React from "react";
 import { Form, Input, InputNumber, Button, DatePicker } from "antd";
 import { layout, tailLayout } from "./utils/layout_style";
 import styles from "../styles/bags_form.module.css";
-import disabledDates from './utils/disabled_dates'
+import disabledDates from "./utils/disabled_dates";
 import submitScheduleForm from "../http/submit_schedule_form";
 
 const { RangePicker } = DatePicker;
 
 const BagsForm = () => {
-  const onFinish = values => {
-    submitScheduleForm("placeholder url", JSON.stringify(values))
-    console.log("Success:", values);
+  const onFinish = (values) => {
+    const clonedValues = JSON.parse(JSON.stringify(values));
+    // const { timeRange } = values;
+
+    // delete clonedValues.timeRange;
+
+    const newValues = {
+      ...clonedValues,
+      // minTimeForPickup: timeRange[0].utc().format(),
+      // maxTimeForPickup: timeRange[1].utc().format(),
+    };
+        
+    submitScheduleForm(process.env.REACT_APP_POST_URL, JSON.stringify(newValues));
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -23,7 +33,7 @@ const BagsForm = () => {
       {...layout}
       name="basic"
       initialValues={{
-        remember: true
+        remember: true,
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -32,12 +42,12 @@ const BagsForm = () => {
       <Form.Item
         label="Number of bags"
         type="number"
-        name="bags"
+        name="numberOfBags"
         rules={[
           {
             required: true,
-            message: "Please input the number of bags you have"
-          }
+            message: "Please input the number of bags you have",
+          },
         ]}
       >
         <InputNumber placeholder="3" className={styles.w100} />
@@ -45,19 +55,19 @@ const BagsForm = () => {
 
       <Form.Item
         label="Time range for pickup"
-        name="timerange"
+        name="timeRange"
         rules={[
           {
-            required: true,
-            message: "Select a time range"
-          }
+            // required: true,
+            message: "Select a time range",
+          },
         ]}
       >
         <RangePicker
           className={styles.w100}
           disabledDate={disabledDates}
           showTime={{ format: "HH:mm" }}
-          format="YYYY-MM-DD HH:mm"
+          format="DD-MM-YYYY HH:mm"
         />
       </Form.Item>
 
@@ -67,9 +77,9 @@ const BagsForm = () => {
         name="location"
         rules={[
           {
-            required: true,
-            message: "Please input your location"
-          }
+            // required: true,
+            message: "Please input your location",
+          },
         ]}
       >
         <Input placeholder="No 2 west street" />
@@ -78,12 +88,12 @@ const BagsForm = () => {
       <Form.Item
         label="Account Number"
         type="number"
-        name="acctbum"
+        name="accountNumber"
         rules={[
           {
-            required: true,
-            message: "Please input account number"
-          }
+            // required: true,
+            message: "Please input account number",
+          },
         ]}
       >
         <InputNumber placeholder="3095837582" className={styles.w100} />
@@ -92,12 +102,12 @@ const BagsForm = () => {
       <Form.Item
         label="Account Name"
         type="text"
-        name="acctnum"
+        name="accountName"
         rules={[
           {
-            required: true,
-            message: "Please input account name"
-          }
+            // required: true,
+            message: "Please input account name",
+          },
         ]}
       >
         <Input placeholder="My money account" />
@@ -106,12 +116,12 @@ const BagsForm = () => {
       <Form.Item
         label="Bank Name"
         type="text"
-        name="bankname"
+        name="bankName"
         rules={[
           {
-            required: true,
-            message: "Please input bank name"
-          }
+            // required: true,
+            message: "Please input bank name",
+          },
         ]}
       >
         <Input placeholder="Boss Baby Bank" />
