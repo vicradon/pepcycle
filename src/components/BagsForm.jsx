@@ -1,21 +1,15 @@
 import React from "react";
-import { Form, InputNumber, Button, DatePicker, TimePicker } from "antd";
-import { layout, tailLayout } from "./layoutStyle";
-import styles from '../styles/bags_form.module.css'
+import { Form, Input, InputNumber, Button, DatePicker } from "antd";
+import { layout, tailLayout } from "./utils/layout_style";
+import styles from "../styles/bags_form.module.css";
+import disabledDates from './utils/disabled_dates'
+import submitScheduleForm from "../http/submit_schedule_form";
 
-const { RangePicker } = TimePicker;
-
-const disabledDates = currentDate => {
-  const today = new Date();
-  today.setDate(today.getDate() - 1);
-  if (new Date(currentDate._d) < today) {
-    return true;
-  }
-  return false;
-};
+const { RangePicker } = DatePicker;
 
 const BagsForm = () => {
   const onFinish = values => {
+    submitScheduleForm("placeholder url", JSON.stringify(values))
     console.log("Success:", values);
   };
 
@@ -25,7 +19,7 @@ const BagsForm = () => {
 
   return (
     <Form
-    className={styles.bagsForm}
+      className={styles.bagsForm}
       {...layout}
       name="basic"
       initialValues={{
@@ -34,7 +28,7 @@ const BagsForm = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <h1>Schedule pickup</h1>
+      <h1 className={styles.heading}>Schedule pickup</h1>
       <Form.Item
         label="Number of bags"
         type="number"
@@ -46,20 +40,7 @@ const BagsForm = () => {
           }
         ]}
       >
-        <InputNumber />
-      </Form.Item>
-
-      <Form.Item
-        label="Date for pickup"
-        name="pickupdate"
-        rules={[
-          {
-            required: true,
-            message: "Select date for pickup"
-          }
-        ]}
-      >
-        <DatePicker format="DD/MM/YYYY" disabledDate={disabledDates} />
+        <InputNumber placeholder="3" className={styles.w100} />
       </Form.Item>
 
       <Form.Item
@@ -72,11 +53,76 @@ const BagsForm = () => {
           }
         ]}
       >
-        <RangePicker />
+        <RangePicker
+          className={styles.w100}
+          disabledDate={disabledDates}
+          showTime={{ format: "HH:mm" }}
+          format="YYYY-MM-DD HH:mm"
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="Location"
+        type="text"
+        name="location"
+        rules={[
+          {
+            required: true,
+            message: "Please input your location"
+          }
+        ]}
+      >
+        <Input placeholder="No 2 west street" />
+      </Form.Item>
+
+      <Form.Item
+        label="Account Number"
+        type="number"
+        name="acctbum"
+        rules={[
+          {
+            required: true,
+            message: "Please input account number"
+          }
+        ]}
+      >
+        <InputNumber placeholder="3095837582" className={styles.w100} />
+      </Form.Item>
+
+      <Form.Item
+        label="Account Name"
+        type="text"
+        name="acctnum"
+        rules={[
+          {
+            required: true,
+            message: "Please input account name"
+          }
+        ]}
+      >
+        <Input placeholder="My money account" />
+      </Form.Item>
+
+      <Form.Item
+        label="Bank Name"
+        type="text"
+        name="bankname"
+        rules={[
+          {
+            required: true,
+            message: "Please input bank name"
+          }
+        ]}
+      >
+        <Input placeholder="Boss Baby Bank" />
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button className={styles.submitButton} type="primary" htmlType="submit">
+        <Button
+          className={styles.submitButton}
+          type="primary"
+          htmlType="submit"
+        >
           Schedule
         </Button>
       </Form.Item>
