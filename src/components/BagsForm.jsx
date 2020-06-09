@@ -20,7 +20,7 @@ const BagsForm = () => {
       maxTimeForPickup: timeRange[1].utc().format(),
     };
         
-    submitScheduleForm(process.env.REACT_APP_POST_URL, JSON.stringify(newValues));
+    submitScheduleForm('https://pep-cycle-funtions.azurewebsites.net/api/pepcycle-functions', JSON.stringify(newValues));
   };
 
   const onFinishFailed = (errorInfo) => {

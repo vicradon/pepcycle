@@ -8,6 +8,7 @@ The code presented here is code from a workshop on Azure Functions
 1. Clone or download this repo
 2. install dependencies
 3. Generate an .env file from the .env.example
+4. 
 
 ## To contribute
 ### What we need
