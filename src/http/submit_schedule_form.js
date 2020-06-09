@@ -14,10 +14,7 @@ const submitScheduleForm = (url, jsonData) => {
       launchModal("success");
       alert("success")
     })
-    .catch((err) => {
-      console.error(err);
-      alert("an error occured")
-    });
+    .catch((err) => { });
 };
 
 export default submitScheduleForm;
