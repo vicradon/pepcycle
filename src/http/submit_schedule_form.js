@@ -12,9 +12,11 @@ const submitScheduleForm = (url, jsonData) => {
     .then((res) => res.json())
     .then((res) => {
       launchModal("success");
+      alert("success")
     })
     .catch((err) => {
       console.error(err);
+      alert("an error occured")
     });
 };
 
