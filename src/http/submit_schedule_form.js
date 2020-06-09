@@ -14,10 +14,7 @@ const submitScheduleForm = (url, jsonData) => {
       launchModal("success");
     })
     .catch((err) => {
-      const error = JSON.parse(
-        JSON.stringify(err, Object.getOwnPropertyNames(err))
-      );
-      launchModal("error", error.message);
+      console.error(err);
     });
 };
 
