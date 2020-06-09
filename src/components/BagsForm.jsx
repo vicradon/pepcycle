@@ -10,14 +10,14 @@ const { RangePicker } = DatePicker;
 const BagsForm = () => {
   const onFinish = (values) => {
     const clonedValues = JSON.parse(JSON.stringify(values));
-    // const { timeRange } = values;
+    const { timeRange } = values;
 
-    // delete clonedValues.timeRange;
+    delete clonedValues.timeRange;
 
     const newValues = {
       ...clonedValues,
-      // minTimeForPickup: timeRange[0].utc().format(),
-      // maxTimeForPickup: timeRange[1].utc().format(),
+      minTimeForPickup: timeRange[0].utc().format(),
+      maxTimeForPickup: timeRange[1].utc().format(),
     };
         
     submitScheduleForm(process.env.REACT_APP_POST_URL, JSON.stringify(newValues));
@@ -58,7 +58,7 @@ const BagsForm = () => {
         name="timeRange"
         rules={[
           {
-            // required: true,
+            required: true,
             message: "Select a time range",
           },
         ]}
@@ -77,7 +77,7 @@ const BagsForm = () => {
         name="location"
         rules={[
           {
-            // required: true,
+            required: true,
             message: "Please input your location",
           },
         ]}
@@ -91,7 +91,7 @@ const BagsForm = () => {
         name="accountNumber"
         rules={[
           {
-            // required: true,
+            required: true,
             message: "Please input account number",
           },
         ]}
@@ -105,7 +105,7 @@ const BagsForm = () => {
         name="accountName"
         rules={[
           {
-            // required: true,
+            required: true,
             message: "Please input account name",
           },
         ]}
@@ -119,7 +119,7 @@ const BagsForm = () => {
         name="bankName"
         rules={[
           {
-            // required: true,
+            required: true,
             message: "Please input bank name",
           },
         ]}
