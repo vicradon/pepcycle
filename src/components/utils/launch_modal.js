@@ -17,10 +17,11 @@ const launchModal = (type, errorMsg) => {
       : "";
 
   const modal = type === "success" ? successModal : errorModal;
+
   const timer = setInterval(() => {
     secondsToGo -= 1;
     modal.update({
-      content: `${errorMsg} Closes in ${secondsToGo} second.`,
+      content: `${errorMsg ? errorMsg : ""} Closes in ${secondsToGo} second.`,
     });
   }, 1000);
   setTimeout(() => {
