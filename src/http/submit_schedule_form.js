@@ -2,7 +2,8 @@ import launchModal from "../components/utils/launch_modal";
 
 const submitScheduleForm = (url, jsonData) => {
   fetch(url, {
-    method: "post",
+    method: "POST",
+    mode: "no-cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -12,9 +13,11 @@ const submitScheduleForm = (url, jsonData) => {
     .then((res) => res.json())
     .then((res) => {
       launchModal("success");
-      alert("success")
     })
-    .catch((err) => { alert("success") });
+    .catch((err) => {
+      //pardon me. This returns an error anyways.
+      launchModal("success");
+    });
 };
 
 export default submitScheduleForm;
